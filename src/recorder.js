@@ -10,11 +10,22 @@
 //
 // Sends are serialised through one queue because they all come from one key.
 
-import { createWalletClient, createPublicClient, http, keccak256, encodeFunctionData, parseAbi } from "viem";
+import { createWalletClient, createPublicClient, http, fallback, keccak256, encodeFunctionData, parseAbi } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains";
 
-const RPC = "https://sepolia.base.org";
+// One public endpoint rate limits from Worker addresses often enough to lose a
+// verdict, so read and write across several and let viem fall through.
+const RPCS = [
+  "https://sepolia.base.org",
+  "https://base-sepolia-rpc.publicnode.com",
+  "https://base-sepolia.gateway.tenderly.co",
+];
+
+// Base Sepolia sits near 0.006 gwei. Setting the fees explicitly keeps the send to
+// one round trip instead of three, which is the difference between a verdict landing
+// and a fee estimation failing on a rate limited endpoint.
+const FEES = { maxFeePerGas: 50_000_000n, maxPriorityFeePerGas: 2_000_000n };
 
 const COURT_ABI = parseAbi([
   "function enterVerdict(bytes32 caseId, bytes32 claimHash, uint8 verdict, uint16 confidenceBp, uint16 panelSize, bytes32 panelRoot)",
@@ -43,12 +54,23 @@ const serialise = (fn) => {
 
 function clients(env) {
   const account = privateKeyToAccount(env.PAYER_KEY);
-  const transport = http(RPC);
+  const transport = fallback(
+    RPCS.map((u) => http(u, { retryCount: 2, retryDelay: 400, timeout: 20_000 })),
+    { rank: false }
+  );
   return {
     account,
     wallet: createWalletClient({ account, chain: baseSepolia, transport }),
     pub: createPublicClient({ chain: baseSepolia, transport }),
   };
+}
+
+/** Send with the fees pinned and the nonce read fresh, then wait for the receipt. */
+async function send(wallet, pub, account, to, data, gas) {
+  const nonce = await pub.getTransactionCount({ address: account.address, blockTag: "pending" });
+  const hash = await wallet.sendTransaction({ to, data, nonce, gas, ...FEES });
+  const receipt = await pub.waitForTransactionReceipt({ hash, timeout: 90_000 });
+  return { hash, receipt };
 }
 
 const bytes32 = (s) => keccak256(new TextEncoder().encode(s));
@@ -65,8 +87,8 @@ export async function commitVerdict(env, kase, court) {
       functionName: "enterVerdict",
       args: [bytes32(kase.id), kase.claimHash, verdict, Math.min(10000, t.agreementBps || 0), Math.min(65535, t.counted), kase.panelRoot],
     });
-    const hash = await wallet.sendTransaction({ to: court, data });
-    const receipt = await pub.waitForTransactionReceipt({ hash, timeout: 60_000 });
+    const { wallet: w, pub: p, account } = { wallet, pub, account: clients(env).account };
+    const { hash, receipt } = await send(w, p, account, court, data, 200_000n);
     return { verdictTx: hash, block: Number(receipt.blockNumber), status: receipt.status, verdict, confidenceBp: t.agreementBps };
   });
 }
@@ -87,15 +109,13 @@ export async function openAppeal(env, kase, court, intentName) {
     const params = [[], [], [kase.claim], []];
     const before = await pub.readContract({ address: diamond, abi: DIAMOND_ABI, functionName: "jobCount" });
     const createData = encodeFunctionData({ abi: DIAMOND_ABI, functionName: "createJob", args: [intentId, params, court] });
-    const createTx = await wallet.sendTransaction({ to: diamond, data: createData });
-    const receipt = await pub.waitForTransactionReceipt({ hash: createTx, timeout: 90_000 });
+    const { hash: createTx, receipt } = await send(wallet, pub, account, diamond, createData, 500_000n);
     if (receipt.status !== "success") return { error: "createJob reverted", createTx };
 
     // Job ids are sequential, so the one we just opened is the previous count.
     const jobId = Number(before);
     const regData = encodeFunctionData({ abi: COURT_ABI, functionName: "registerAppeal", args: [bytes32(kase.id), BigInt(jobId)] });
-    const registerTx = await wallet.sendTransaction({ to: court, data: regData });
-    await pub.waitForTransactionReceipt({ hash: registerTx, timeout: 60_000 });
+    const { hash: registerTx } = await send(wallet, pub, account, court, regData, 150_000n);
     return { jobId, createTx, registerTx, intent: intentName, openedAt: Math.floor(Date.now() / 1000) };
   });
 }

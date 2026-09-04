@@ -114,7 +114,8 @@ export default {
         }
         claim = String(claim || "").trim().slice(0, 400);
         if (!claim) return seeOther("/");
-        const kase = await tryCase({ claim, env, store, data: DATA, ip: clientIp(request) });
+        const seeded = url.searchParams.get("seed") === env.SEED_TOKEN && Boolean(env.SEED_TOKEN);
+        const kase = await tryCase({ claim, env, store, data: DATA, ip: clientIp(request), seeded });
         // Committing the verdict is gas only, so every case that produced a jury
         // gets written to the register before the visitor sees the page.
         if (kase.status === "closed" && kase.tally?.counted && !kase.servedFromCache) {

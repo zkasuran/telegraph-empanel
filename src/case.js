@@ -98,7 +98,7 @@ const shortId = (h) => h.slice(2, 12);
  * Open, try and close one case.
  * `emit` is called as the case progresses so the browser can stream it.
  */
-export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) {
+export async function tryCase({ claim, env, store, data, ip, seeded = false, emit = () => {} }) {
   const openedAt = nowSec();
   const claimHash = claimHashOf(claim);
   const payer = new Payer(env.PAYER_KEY, { minGapMs: 450, retries: 2 });
@@ -110,9 +110,10 @@ export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) 
     return cached;
   }
 
-  const quota = await store.takeQuota(ip, 0.11);
+  const quota = await store.takeQuota(ip, 0.11, seeded ? { perIpPerHour: 1e9 } : {});
   if (!quota.ok) {
-    const refused = { id: shortId(claimHash), claim, claimHash, openedAt, status: "refused", refusal: quota.reason, jurors: [] };
+    const refused = { id: shortId(claimHash), claim, claimHash, openedAt, status: "refused", refusal: quota.reason, jurors: [], tally: { outcome: "refused", counted: 0, excluded: 0, agreementBps: 0, clusters: [], dissent: [] } };
+    await store.putCase(refused);
     emit({ phase: "refused", case: refused });
     return refused;
   }
@@ -123,6 +124,7 @@ export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) 
     claimHash,
     openedAt,
     status: "open",
+    seeded,
     payer: payer.address,
     subject: parseSubject(claim),
     jurors: [],
@@ -141,7 +143,7 @@ export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) 
     emit({ phase: "closed", case: kase });
     return kase;
   }
-  ledgerRows.push(ledgerRow("router", routed, claim, null));
+  ledgerRows.push(ledgerRow("router", routed, claim, null, null, seeded));
   const doc = routed.doc || {};
   kase.intent = doc.intent || null;
   kase.routerReasoning = doc.reasoning || null;
@@ -156,6 +158,7 @@ export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) 
       res: routed,
       mapping: routerMiner?.signal_mapping || null,
       ours: routerIsOurs,
+      intent: doc.intent || null,
     })
   );
   emit({ phase: "juror", case: kase });
@@ -197,7 +200,7 @@ export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) 
       };
       const filled = fillPayload(adapter, kase.subject);
       const res = await payer.askDirect(next.id, adapter.method || "GET", filled.endpoint, filled.payload);
-      if (res.ok) ledgerRows.push(ledgerRow("juror", res, claim, next.slug, kase.intent));
+      if (res.ok) ledgerRows.push(ledgerRow("juror", res, claim, next.slug, kase.intent, seeded));
       kase.jurors.push(
         await juror({
           seat: kase.jurors.length,
@@ -206,6 +209,7 @@ export async function tryCase({ claim, env, store, data, ip, emit = () => {} }) 
           slug: next.slug,
           res,
           mapping: next.mapping,
+          intent: kase.intent,
           sent: { method: adapter.method || "GET", endpoint: filled.endpoint, payload: filled.payload, missing: filled.missing },
         })
       );
@@ -233,7 +237,7 @@ function adapterFor(data, intent, minerId) {
   return (data.adapters.adapters || []).find((a) => a.intent_id === intent && String(a.miner_id) === String(minerId) && !a.is_ours);
 }
 
-async function juror({ seat, kind, id, slug, res, mapping, sent, ours = false }) {
+async function juror({ seat, kind, id, slug, res, mapping, sent, ours = false, intent = null }) {
   const row = { seat, kind, minerId: id, slug, ms: res.ms, ok: res.ok, sent, ours };
   if (!res.ok) {
     row.vote = { grade: "no_answer", value: null, text: null };
@@ -249,7 +253,7 @@ async function juror({ seat, kind, id, slug, res, mapping, sent, ours = false })
   const map = mapping && mapping.label_field ? mapping : inferMapping(doc.result);
   row.mapping = map;
   row.vote = readVote(doc.result, map);
-  row.cmp = comparable(row.vote);
+  row.cmp = comparable(row.vote, intent);
 
   if (row.signalHash) {
     const v = await verifySignal(row.signalHash);
@@ -283,11 +287,12 @@ function tallyOfOne(jurors) {
   return { ...t, outcome: jurors[0]?.hashVerified && jurors[0]?.vote?.grade === "usable" ? "single_source" : t.outcome };
 }
 
-function ledgerRow(trigger, res, claim, slug, intent) {
+function ledgerRow(trigger, res, claim, slug, intent, seeded) {
   const doc = res.doc || {};
   return {
     at: nowSec(),
     trigger,
+    seeded: Boolean(seeded),
     intent: doc.intent || intent || null,
     miner: slug || doc.miner_name || String(doc.miner_id || ""),
     minerId: String(doc.miner_id || ""),

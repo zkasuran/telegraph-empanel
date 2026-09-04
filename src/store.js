@@ -108,6 +108,13 @@ export class Store {
     return (await this.kv.get("ledger", "json")) || { calls: 0, usdc: 0, rows: [] };
   }
 
+  /** Author-seeded cases are counted on their own line, never folded into visitor use. */
+  async split() {
+    const led = await this.ledger();
+    const seeded = led.rows.filter((r) => r.seeded).length;
+    return { total: led.calls, seeded, visitor: Math.max(0, led.calls - seeded) };
+  }
+
   // --- sponsored quota ----------------------------------------------------
 
   /**
@@ -155,7 +162,15 @@ export class Store {
   async counters() {
     const [led, doc] = await Promise.all([this.ledger(), this.docket(300)]);
     const voters = doc.reduce((s, d) => s + (d.humanVotes || 0), 0);
-    return { paidCalls: led.calls, usdcSpent: led.usdc, cases: doc.length, humanVotes: voters };
+    const seededCalls = led.rows.filter((r) => r.seeded).length;
+    return {
+      paidCalls: led.calls,
+      seededCalls,
+      visitorCalls: Math.max(0, led.calls - seededCalls),
+      usdcSpent: led.usdc,
+      cases: doc.length,
+      humanVotes: voters,
+    };
   }
 }
 

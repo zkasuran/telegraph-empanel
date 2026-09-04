@@ -57,8 +57,44 @@ const NUM = /-?\d[\d,]*\.?\d*(?:[eE][-+]?\d+)?/g;
 // neither is reporting the number that happens to appear in the sentence.
 const NOTFOUND = /\b(not[_ ]?found|no (?:transaction|record|result|match|data|entry)|does not exist|could not be found|nothing found|unknown (?:transaction|hash))\b/i;
 
+// Intents whose answer is a figure. On these, two miners agree when their numbers
+// agree, however differently they write the sentence around them, and a unit is
+// part of the figure: 0.006 gwei and 6000000 wei are the same answer.
+const NUMERIC_INTENTS = new Set([
+  "GAS_PRICE",
+  "CRYPTO_PRICE",
+  "STOCK_PRICE",
+  "TOKEN_HOLDER_COUNT",
+  "WALLET_BALANCE_CHECK",
+  "TVL_LOOKUP",
+  "CURRENCY_EXCHANGE",
+  "FINANCIAL_DATA",
+]);
+
+const UNIT_SCALE = { wei: 1e-9, gwei: 1, eth: 1e9 };
+
+/** The first figure in a sentence, normalised to gwei when a gas unit is present. */
+function primaryFigure(s) {
+  const m = s.match(/(-?\d[\d,]*\.?\d*)\s*(wei|gwei|eth)\b/i);
+  if (m) {
+    const n = Number(m[1].replace(/,/g, ""));
+    const scale = UNIT_SCALE[m[2].toLowerCase()];
+    if (Number.isFinite(n) && scale) return { n: n * scale, unit: "gwei" };
+  }
+  const pct = s.match(/(-?\d[\d,]*\.?\d*)\s*%/);
+  if (pct) return { n: Number(pct[1].replace(/,/g, "")), unit: "%" };
+  const usd = s.match(/\$\s*(-?\d[\d,]*\.?\d*)/);
+  if (usd) return { n: Number(usd[1].replace(/,/g, "")), unit: "usd" };
+  const bare = s.replace(/0x[0-9a-f]{6,}/g, " ").replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g, " ").match(NUM);
+  if (bare) {
+    const n = Number(bare[0].replace(/,/g, ""));
+    if (Number.isFinite(n)) return { n, unit: null };
+  }
+  return null;
+}
+
 /** Pull the comparable core out of a vote so two miners can be checked against each other. */
-export function comparable(vote) {
+export function comparable(vote, intent) {
   if (vote.grade !== "usable") return null;
   const v = vote.value;
   if (typeof v === "number") return { kind: "number", n: v };
@@ -72,6 +108,11 @@ export function comparable(vote) {
   const no = /\b(invalid|unsafe|false|no|refuted|scam|malicious|phishing|fail(ed)?|expired|revoked|high risk)\b/;
   if (yes.test(s) && !no.test(s)) return { kind: "bool", b: true, label: s.slice(0, 60) };
   if (no.test(s) && !yes.test(s)) return { kind: "bool", b: false, label: s.slice(0, 60) };
+
+  if (NUMERIC_INTENTS.has(intent)) {
+    const fig = primaryFigure(s.length > 4 ? s : `${s} ${vote.text || ""}`);
+    if (fig) return { kind: "number", n: fig.n, unit: fig.unit, label: s.slice(0, 140) };
+  }
 
   // Identifiers are not measurements. An IP, an address or a hash quoted back in
   // a sentence must never become the number a miner is taken to have answered.
@@ -117,7 +158,7 @@ const relClose = (a, b, tol) => {
  * Count the panel. Only usable votes are counted, and every excluded juror is
  * reported with the reason it was excluded.
  */
-export function tally(votes, { numericTolerance = 0.02 } = {}) {
+export function tally(votes, { numericTolerance = 0.05 } = {}) {
   const countable = (v) => v.vote?.grade === "usable" && v.hashVerified && v.cmp && !v.excluded;
   const counted = votes.filter(countable);
   const excluded = votes.filter((v) => !countable(v));
@@ -208,7 +249,16 @@ function numericSpread(counted) {
   return { lo, hi, samples: ns.length, spreadPct: lo === 0 ? null : ((hi - lo) / Math.abs(lo)) * 100 };
 }
 
-/** Does this panel need more jurors? Only conflict grows a jury, never silence. */
+/**
+ * Does this panel need more jurors?
+ *
+ * Two reasons and no others. Below three countable votes there is nothing to
+ * corroborate yet, usually because a miner errored or abstained, so we seat more.
+ * Above that, only real conflict grows a jury. Silence never does, because paying
+ * more miners to say nothing is not evidence.
+ */
 export function shouldEscalate(t) {
-  return t.outcome === "hung" || (t.outcome === "corroborated" && t.agreementBps < 8000);
+  if (t.counted < 3) return true;
+  if (t.outcome === "hung") return true;
+  return t.outcome === "corroborated" && t.agreementBps < 8000;
 }

@@ -89,6 +89,7 @@ our own miners are barred from every jury by wallet address and the bar is check
 export function counterBar(c) {
   return `<div class="counters">
 <span class="pill">paid Telegraph calls <b>${c.paidCalls}</b></span>
+<span class="pill dim">of those, opened by visitors <b>${c.visitorCalls}</b></span>
 <span class="pill">USDC spent <b>$${c.usdcSpent.toFixed(2)}</b></span>
 <span class="pill dim">cases tried <b>${c.cases}</b></span>
 <span class="pill dim">human jurors <b>${c.humanVotes}</b></span>
