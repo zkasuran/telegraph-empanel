@@ -1,0 +1,17 @@
+node_modules/
+.wrangler/
+.dev.vars
+.env
+.env.*
+
+# Submission and form-fill pages carry personal data and form internals. Never pushed.
+/submit/
+DEMO-*.mp4
+upload-*/
+
+# forge build output
+contracts/out/
+contracts/cache/
+
+# raw catalogue snapshots, regenerable with data/build-data.mjs
+data/_raw/

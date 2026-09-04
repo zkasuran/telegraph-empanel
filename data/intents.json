@@ -1,0 +1,3090 @@
+{
+  "generated_at": "2026-09-04T12:06:37Z",
+  "source": "https://devnode.telegraphprotocol.com/engine/v1/intents",
+  "canonical_on_chain": 45,
+  "count": 45,
+  "unroutable": [
+    "TEXT_AUTHENTICITY_CHECK",
+    "TWITTER_SEARCH"
+  ],
+  "hint_derivation": "keywords are the description's own terms weighted by inverse document frequency across all 45 descriptions; phrases are pairs it uses; requirements and disqualifiers are its own sentences verbatim; routes_elsewhere is every other intent it names; a regex hint is emitted only when the description contains the phrase in derived_from",
+  "intents": [
+    {
+      "intent_id": "ACADEMIC_SEARCH",
+      "intent_name": "ACADEMIC_SEARCH",
+      "description": "Query asks to search scholarly papers, journals or academic literature specifically, rather than the general web.",
+      "miner_count": 6,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "academic",
+            "weight": 3.807
+          },
+          {
+            "term": "journals",
+            "weight": 3.807
+          },
+          {
+            "term": "literature",
+            "weight": 3.807
+          },
+          {
+            "term": "papers",
+            "weight": 3.807
+          },
+          {
+            "term": "scholarly",
+            "weight": 3.807
+          },
+          {
+            "term": "web",
+            "weight": 3.114
+          },
+          {
+            "term": "search",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "search scholarly",
+          "scholarly papers",
+          "papers journals",
+          "academic literature"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Query asks to search scholarly papers, journals or academic literature specifically, rather than the general web."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "AGENT_TASK",
+      "intent_name": "AGENT_TASK",
+      "description": "Query asks about autonomous AI agent behavior specifically (tool use, taking actions, multi-step autonomy) as distinct from a standard chatbot, or is itself a request requiring autonomous multi-step action.",
+      "miner_count": 7,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "autonomous",
+            "weight": 7.613
+          },
+          {
+            "term": "multi-step",
+            "weight": 6.227
+          },
+          {
+            "term": "actions",
+            "weight": 3.807
+          },
+          {
+            "term": "autonomy",
+            "weight": 3.807
+          },
+          {
+            "term": "behavior",
+            "weight": 3.807
+          },
+          {
+            "term": "chatbot",
+            "weight": 3.807
+          },
+          {
+            "term": "requiring",
+            "weight": 3.807
+          },
+          {
+            "term": "standard",
+            "weight": 3.807
+          },
+          {
+            "term": "taking",
+            "weight": 3.807
+          },
+          {
+            "term": "tool",
+            "weight": 3.807
+          },
+          {
+            "term": "action",
+            "weight": 3.114
+          },
+          {
+            "term": "agent",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "agent behavior",
+          "tool use",
+          "use taking",
+          "taking actions",
+          "actions multi-step",
+          "multi-step autonomy"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Query asks about autonomous AI agent behavior specifically (tool use, taking actions, multi-step autonomy) as distinct from a standard chatbot, or is itself a request requiring autonomous multi-step action."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "AI_TEXT_DETECTION",
+      "intent_name": "AI_TEXT_DETECTION",
+      "description": "Query provides a specific block of text and asks whether it was written by an AI or a human. The user must supply actual text content to analyze — a question that merely asks about AI detection conceptually (without providing text to analyze) is not this intent.",
+      "miner_count": 4,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "analyze",
+            "weight": 7.613
+          },
+          {
+            "term": "text",
+            "weight": 6.045
+          },
+          {
+            "term": "conceptually",
+            "weight": 3.807
+          },
+          {
+            "term": "human",
+            "weight": 3.807
+          },
+          {
+            "term": "providing",
+            "weight": 3.807
+          },
+          {
+            "term": "was",
+            "weight": 3.807
+          },
+          {
+            "term": "block",
+            "weight": 3.114
+          },
+          {
+            "term": "detection",
+            "weight": 3.114
+          },
+          {
+            "term": "must",
+            "weight": 3.114
+          },
+          {
+            "term": "written",
+            "weight": 3.114
+          },
+          {
+            "term": "intent",
+            "weight": 2.708
+          },
+          {
+            "term": "content",
+            "weight": 2.42
+          }
+        ],
+        "phrases": [
+          "was written",
+          "text content",
+          "detection conceptually",
+          "providing text"
+        ],
+        "examples": [],
+        "requirements": [
+          "The user must supply actual text content to analyze — a question that merely asks about AI detection conceptually (without providing text to analyze) is not this intent."
+        ],
+        "disqualifiers": [
+          "The user must supply actual text content to analyze — a question that merely asks about AI detection conceptually (without providing text to analyze) is not this intent."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "CHAT_COMPLETION",
+      "intent_name": "CHAT_COMPLETION",
+      "description": "General knowledge, reasoning, explanation, or conversational question answerable directly without live data, external sources, or specialized tooling. This is the default/general-purpose intent when nothing more specific clearly fits — e.g. 'explain what X does.'",
+      "miner_count": 10,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "clearly",
+            "weight": 3.807
+          },
+          {
+            "term": "default/general-purpose",
+            "weight": 3.807
+          },
+          {
+            "term": "explain",
+            "weight": 3.807
+          },
+          {
+            "term": "explanation",
+            "weight": 3.807
+          },
+          {
+            "term": "external",
+            "weight": 3.807
+          },
+          {
+            "term": "fits",
+            "weight": 3.807
+          },
+          {
+            "term": "nothing",
+            "weight": 3.807
+          },
+          {
+            "term": "reasoning",
+            "weight": 3.807
+          },
+          {
+            "term": "specialized",
+            "weight": 3.807
+          },
+          {
+            "term": "tooling",
+            "weight": 3.807
+          },
+          {
+            "term": "answerable",
+            "weight": 3.114
+          },
+          {
+            "term": "conversational",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "knowledge reasoning",
+          "reasoning explanation",
+          "conversational question",
+          "question answerable",
+          "answerable directly",
+          "live data"
+        ],
+        "examples": [
+          "explain what X does."
+        ],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "CONTENT_EXTRACTION",
+      "intent_name": "CONTENT_EXTRACTION",
+      "description": "Query supplies unstructured content and asks for specific structured fields to be pulled out of it.",
+      "miner_count": 3,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "fields",
+            "weight": 3.807
+          },
+          {
+            "term": "out",
+            "weight": 3.807
+          },
+          {
+            "term": "pulled",
+            "weight": 3.807
+          },
+          {
+            "term": "structured",
+            "weight": 3.807
+          },
+          {
+            "term": "unstructured",
+            "weight": 3.807
+          },
+          {
+            "term": "content",
+            "weight": 2.42
+          }
+        ],
+        "phrases": [
+          "unstructured content",
+          "structured fields",
+          "pulled out"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "CONTENT_MODERATION",
+      "intent_name": "CONTENT_MODERATION",
+      "description": "Query is itself asking to classify, flag, or moderate a specific piece of provided content, OR asks how automated content moderation works as a method/technique — not merely a question that mentions moderation as an unrelated concept.",
+      "miner_count": 1,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "moderation",
+            "weight": 7.613
+          },
+          {
+            "term": "content",
+            "weight": 4.841
+          },
+          {
+            "term": "automated",
+            "weight": 3.807
+          },
+          {
+            "term": "classify",
+            "weight": 3.807
+          },
+          {
+            "term": "concept",
+            "weight": 3.807
+          },
+          {
+            "term": "flag",
+            "weight": 3.807
+          },
+          {
+            "term": "method/technique",
+            "weight": 3.807
+          },
+          {
+            "term": "moderate",
+            "weight": 3.807
+          },
+          {
+            "term": "piece",
+            "weight": 3.114
+          },
+          {
+            "term": "mentions",
+            "weight": 2.708
+          },
+          {
+            "term": "unrelated",
+            "weight": 2.708
+          },
+          {
+            "term": "works",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "classify flag",
+          "automated content",
+          "content moderation",
+          "moderation works",
+          "method technique",
+          "mentions moderation"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Query is itself asking to classify, flag, or moderate a specific piece of provided content, OR asks how automated content moderation works as a method/technique — not merely a question that mentions moderation as an unrelated concept."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "CONTENT_VERIFICATION",
+      "intent_name": "CONTENT_VERIFICATION",
+      "description": "Query asks whether a specific piece of supplied content is genuine and unaltered, covering provenance and integrity generally rather than media forensics specifically.",
+      "miner_count": 1,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "forensics",
+            "weight": 3.807
+          },
+          {
+            "term": "integrity",
+            "weight": 3.807
+          },
+          {
+            "term": "provenance",
+            "weight": 3.807
+          },
+          {
+            "term": "unaltered",
+            "weight": 3.807
+          },
+          {
+            "term": "piece",
+            "weight": 3.114
+          },
+          {
+            "term": "genuine",
+            "weight": 2.708
+          },
+          {
+            "term": "content",
+            "weight": 2.42
+          },
+          {
+            "term": "media",
+            "weight": 2.42
+          },
+          {
+            "term": "whether",
+            "weight": 1.727
+          }
+        ],
+        "phrases": [
+          "media forensics"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Query asks whether a specific piece of supplied content is genuine and unaltered, covering provenance and integrity generally rather than media forensics specifically."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "CRYPTO_PRICE",
+      "intent_name": "CRYPTO_PRICE",
+      "description": "Query names a cryptocurrency asset and asks for its current or historical price. Prefer FINANCIAL_DATA for broader market or fundamentals questions.",
+      "miner_count": 14,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "asset",
+            "weight": 3.807
+          },
+          {
+            "term": "broader",
+            "weight": 3.807
+          },
+          {
+            "term": "cryptocurrency",
+            "weight": 3.807
+          },
+          {
+            "term": "financial",
+            "weight": 3.114
+          },
+          {
+            "term": "historical",
+            "weight": 3.114
+          },
+          {
+            "term": "fundamentals",
+            "weight": 2.708
+          },
+          {
+            "term": "questions",
+            "weight": 2.708
+          },
+          {
+            "term": "data",
+            "weight": 2.42
+          },
+          {
+            "term": "market",
+            "weight": 2.42
+          },
+          {
+            "term": "price",
+            "weight": 2.015
+          },
+          {
+            "term": "current",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "cryptocurrency asset",
+          "historical price",
+          "financial data",
+          "broader market",
+          "fundamentals questions"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [
+          {
+            "intent_id": "FINANCIAL_DATA",
+            "clause": "Prefer FINANCIAL_DATA for broader market or fundamentals questions."
+          }
+        ],
+        "regex_hints": [
+          {
+            "slot": "symbol",
+            "pattern": "\\b[A-Z]{2,6}\\b",
+            "derived_from": "cryptocurrency asset"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "CURRENCY_EXCHANGE",
+      "intent_name": "CURRENCY_EXCHANGE",
+      "description": "Query names two currencies and asks for the exchange rate or a converted amount between them.",
+      "miner_count": 7,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "amount",
+            "weight": 3.807
+          },
+          {
+            "term": "converted",
+            "weight": 3.807
+          },
+          {
+            "term": "currencies",
+            "weight": 3.807
+          },
+          {
+            "term": "exchange",
+            "weight": 3.807
+          },
+          {
+            "term": "rate",
+            "weight": 3.807
+          },
+          {
+            "term": "between",
+            "weight": 3.114
+          },
+          {
+            "term": "them",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "exchange rate",
+          "converted amount",
+          "amount between",
+          "between them"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "fromCurrency",
+            "pattern": "\\b[A-Z]{3}\\b",
+            "derived_from": "two currencies"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "CVE_LOOKUP",
+      "intent_name": "CVE_LOOKUP",
+      "description": "Query supplies a CVE identifier and asks for its details, severity or affected versions.",
+      "miner_count": 5,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "affected",
+            "weight": 3.807
+          },
+          {
+            "term": "cve",
+            "weight": 3.807
+          },
+          {
+            "term": "identifier",
+            "weight": 3.807
+          },
+          {
+            "term": "severity",
+            "weight": 3.807
+          },
+          {
+            "term": "versions",
+            "weight": 3.807
+          },
+          {
+            "term": "details",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "cve identifier",
+          "details severity",
+          "affected versions"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "cveId",
+            "pattern": "CVE-\\d{4}-\\d{4,7}",
+            "derived_from": "cve identifier"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "DEEPFAKE_DETECTION",
+      "intent_name": "DEEPFAKE_DETECTION",
+      "description": "Query includes an actual image or video URL/reference and specifically asks whether it is a deepfake or whether a face/person in it has been synthetically generated or swapped. Requires real attached media — the word 'deepfake' alone with no media reference does not qualify.",
+      "miner_count": 1,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "deepfake",
+            "weight": 7.613
+          },
+          {
+            "term": "media",
+            "weight": 4.841
+          },
+          {
+            "term": "face/person",
+            "weight": 3.807
+          },
+          {
+            "term": "generated",
+            "weight": 3.807
+          },
+          {
+            "term": "swapped",
+            "weight": 3.807
+          },
+          {
+            "term": "synthetically",
+            "weight": 3.807
+          },
+          {
+            "term": "whether",
+            "weight": 3.454
+          },
+          {
+            "term": "reference",
+            "weight": 3.114
+          },
+          {
+            "term": "word",
+            "weight": 3.114
+          },
+          {
+            "term": "been",
+            "weight": 2.708
+          },
+          {
+            "term": "has",
+            "weight": 2.708
+          },
+          {
+            "term": "image",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "video url",
+          "url reference",
+          "face person",
+          "has been",
+          "been synthetically",
+          "synthetically generated"
+        ],
+        "examples": [
+          "deepfake"
+        ],
+        "requirements": [
+          "Requires real attached media — the word 'deepfake' alone with no media reference does not qualify."
+        ],
+        "disqualifiers": [
+          "Requires real attached media — the word 'deepfake' alone with no media reference does not qualify."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "url",
+            "pattern": "https?://[^\\s\"'<>]+",
+            "derived_from": "url"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "FACT_CHECK",
+      "intent_name": "FACT_CHECK",
+      "description": "Query supplies a specific claim or statement and asks whether it is true, with supporting evidence. A general knowledge question is CHAT_COMPLETION — this intent requires a checkable claim.",
+      "miner_count": 4,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "claim",
+            "weight": 7.613
+          },
+          {
+            "term": "checkable",
+            "weight": 3.807
+          },
+          {
+            "term": "evidence",
+            "weight": 3.807
+          },
+          {
+            "term": "statement",
+            "weight": 3.807
+          },
+          {
+            "term": "supporting",
+            "weight": 3.807
+          },
+          {
+            "term": "true",
+            "weight": 3.807
+          },
+          {
+            "term": "intent",
+            "weight": 2.708
+          },
+          {
+            "term": "knowledge",
+            "weight": 2.708
+          },
+          {
+            "term": "chat",
+            "weight": 2.42
+          },
+          {
+            "term": "completion",
+            "weight": 2.42
+          },
+          {
+            "term": "whether",
+            "weight": 1.727
+          },
+          {
+            "term": "question",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "supporting evidence",
+          "knowledge question",
+          "chat completion",
+          "checkable claim"
+        ],
+        "examples": [],
+        "requirements": [
+          "A general knowledge question is CHAT_COMPLETION — this intent requires a checkable claim."
+        ],
+        "disqualifiers": [],
+        "routes_elsewhere": [
+          {
+            "intent_id": "CHAT_COMPLETION",
+            "clause": "A general knowledge question is CHAT_COMPLETION — this intent requires a checkable claim."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "FINANCIAL_DATA",
+      "intent_name": "FINANCIAL_DATA",
+      "description": "Query asks for market data, company fundamentals, or financial statistics beyond a single quoted price.",
+      "miner_count": 8,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "beyond",
+            "weight": 3.807
+          },
+          {
+            "term": "quoted",
+            "weight": 3.807
+          },
+          {
+            "term": "statistics",
+            "weight": 3.807
+          },
+          {
+            "term": "company",
+            "weight": 3.114
+          },
+          {
+            "term": "financial",
+            "weight": 3.114
+          },
+          {
+            "term": "fundamentals",
+            "weight": 2.708
+          },
+          {
+            "term": "data",
+            "weight": 2.42
+          },
+          {
+            "term": "market",
+            "weight": 2.42
+          },
+          {
+            "term": "price",
+            "weight": 2.015
+          }
+        ],
+        "phrases": [
+          "market data",
+          "data company",
+          "company fundamentals",
+          "financial statistics",
+          "statistics beyond",
+          "quoted price"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "FRAUD_DETECTION",
+      "intent_name": "FRAUD_DETECTION",
+      "description": "Query asks how likely a specific entity, transaction or action is to be fraudulent.",
+      "miner_count": 15,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "fraudulent",
+            "weight": 3.807
+          },
+          {
+            "term": "likely",
+            "weight": 3.807
+          },
+          {
+            "term": "action",
+            "weight": 3.114
+          },
+          {
+            "term": "entity",
+            "weight": 3.114
+          },
+          {
+            "term": "transaction",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "entity transaction"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "GAME_RESULT",
+      "intent_name": "GAME_RESULT",
+      "description": "Query names a specific completed sports fixture or competition and asks for its final outcome or winner. Distinct from an in-progress or live score, which is SPORTS_SCORE.",
+      "miner_count": 3,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "score",
+            "weight": 6.227
+          },
+          {
+            "term": "sports",
+            "weight": 6.227
+          },
+          {
+            "term": "completed",
+            "weight": 3.807
+          },
+          {
+            "term": "final",
+            "weight": 3.807
+          },
+          {
+            "term": "in-progress",
+            "weight": 3.807
+          },
+          {
+            "term": "outcome",
+            "weight": 3.807
+          },
+          {
+            "term": "winner",
+            "weight": 3.807
+          },
+          {
+            "term": "competition",
+            "weight": 3.114
+          },
+          {
+            "term": "fixture",
+            "weight": 3.114
+          },
+          {
+            "term": "live",
+            "weight": 2.42
+          }
+        ],
+        "phrases": [
+          "completed sports",
+          "sports fixture",
+          "final outcome",
+          "live score",
+          "sports score"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Distinct from an in-progress or live score, which is SPORTS_SCORE."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "SPORTS_SCORE",
+            "clause": "Distinct from an in-progress or live score, which is SPORTS_SCORE."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "GAS_PRICE",
+      "intent_name": "GAS_PRICE",
+      "description": "Query asks for the current or recent transaction fee level on a named blockchain network. Distinct from the price of that chain's token, which is CRYPTO_PRICE.",
+      "miner_count": 9,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "price",
+            "weight": 4.03
+          },
+          {
+            "term": "crypto",
+            "weight": 3.807
+          },
+          {
+            "term": "fee",
+            "weight": 3.807
+          },
+          {
+            "term": "level",
+            "weight": 3.807
+          },
+          {
+            "term": "network",
+            "weight": 3.807
+          },
+          {
+            "term": "blockchain",
+            "weight": 3.114
+          },
+          {
+            "term": "recent",
+            "weight": 3.114
+          },
+          {
+            "term": "transaction",
+            "weight": 2.708
+          },
+          {
+            "term": "chain",
+            "weight": 2.42
+          },
+          {
+            "term": "token",
+            "weight": 2.42
+          },
+          {
+            "term": "current",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "recent transaction",
+          "transaction fee",
+          "fee level",
+          "blockchain network",
+          "crypto price"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Distinct from the price of that chain's token, which is CRYPTO_PRICE."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "CRYPTO_PRICE",
+            "clause": "Distinct from the price of that chain's token, which is CRYPTO_PRICE."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "IMAGE_VERIFICATION",
+      "intent_name": "IMAGE_VERIFICATION",
+      "description": "Query includes an actual image URL/reference and asks whether it has been digitally manipulated, edited, or spliced (distinct from asking if it's AI-generated outright — that's MEDIA_AUTHENTICITY_CHECK). Requires real attached media.",
+      "miner_count": 2,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "media",
+            "weight": 4.841
+          },
+          {
+            "term": "check",
+            "weight": 3.807
+          },
+          {
+            "term": "digitally",
+            "weight": 3.807
+          },
+          {
+            "term": "edited",
+            "weight": 3.807
+          },
+          {
+            "term": "manipulated",
+            "weight": 3.807
+          },
+          {
+            "term": "outright",
+            "weight": 3.807
+          },
+          {
+            "term": "spliced",
+            "weight": 3.807
+          },
+          {
+            "term": "ai-generated",
+            "weight": 3.114
+          },
+          {
+            "term": "authenticity",
+            "weight": 3.114
+          },
+          {
+            "term": "been",
+            "weight": 2.708
+          },
+          {
+            "term": "has",
+            "weight": 2.708
+          },
+          {
+            "term": "image",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "image url",
+          "url reference",
+          "has been",
+          "been digitally",
+          "digitally manipulated",
+          "manipulated edited"
+        ],
+        "examples": [
+          "s AI-generated outright — that"
+        ],
+        "requirements": [
+          "Requires real attached media."
+        ],
+        "disqualifiers": [
+          "Query includes an actual image URL/reference and asks whether it has been digitally manipulated, edited, or spliced (distinct from asking if it's AI-generated outright — that's MEDIA_AUTHENTICITY_CHECK)."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "MEDIA_AUTHENTICITY_CHECK",
+            "clause": "Query includes an actual image URL/reference and asks whether it has been digitally manipulated, edited, or spliced (distinct from asking if it's AI-generated outright — that's MEDIA_AUTHENTICITY_CHECK)."
+          }
+        ],
+        "regex_hints": [
+          {
+            "slot": "url",
+            "pattern": "https?://[^\\s\"'<>]+",
+            "derived_from": "url"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "IP_GEOLOCATION",
+      "intent_name": "IP_GEOLOCATION",
+      "description": "Query supplies an IP address and asks where it is located geographically. For abuse history, use IP_REPUTATION.",
+      "miner_count": 5,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "abuse",
+            "weight": 3.807
+          },
+          {
+            "term": "geographically",
+            "weight": 3.807
+          },
+          {
+            "term": "history",
+            "weight": 3.807
+          },
+          {
+            "term": "located",
+            "weight": 3.807
+          },
+          {
+            "term": "reputation",
+            "weight": 3.807
+          },
+          {
+            "term": "address",
+            "weight": 2.708
+          },
+          {
+            "term": "use",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "located geographically",
+          "abuse history",
+          "history use"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [
+          {
+            "intent_id": "IP_REPUTATION",
+            "clause": "For abuse history, use IP_REPUTATION."
+          }
+        ],
+        "regex_hints": [
+          {
+            "slot": "ip",
+            "pattern": "(?:\\d{1,3}\\.){3}\\d{1,3}|(?:[0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}",
+            "derived_from": "ip address"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "LANGUAGE_GENERATION",
+      "intent_name": "LANGUAGE_GENERATION",
+      "description": "Query asks about how language generation works as a capability or technique, or requests free-form natural-language output from a described prompt. Prefer CHAT_COMPLETION for ordinary conversational questions.",
+      "miner_count": 12,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "capability",
+            "weight": 3.807
+          },
+          {
+            "term": "generation",
+            "weight": 3.807
+          },
+          {
+            "term": "natural-language",
+            "weight": 3.807
+          },
+          {
+            "term": "ordinary",
+            "weight": 3.807
+          },
+          {
+            "term": "prompt",
+            "weight": 3.807
+          },
+          {
+            "term": "technique",
+            "weight": 3.807
+          },
+          {
+            "term": "conversational",
+            "weight": 3.114
+          },
+          {
+            "term": "described",
+            "weight": 3.114
+          },
+          {
+            "term": "free-form",
+            "weight": 3.114
+          },
+          {
+            "term": "language",
+            "weight": 3.114
+          },
+          {
+            "term": "output",
+            "weight": 3.114
+          },
+          {
+            "term": "questions",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "language generation",
+          "generation works",
+          "free-form natural-language",
+          "natural-language output",
+          "described prompt",
+          "chat completion"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [
+          {
+            "intent_id": "CHAT_COMPLETION",
+            "clause": "Prefer CHAT_COMPLETION for ordinary conversational questions."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "LANGUAGE_TRANSLATION",
+      "intent_name": "LANGUAGE_TRANSLATION",
+      "description": "Query supplies text and names a target language, asking for translation between two languages.",
+      "miner_count": 4,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "languages",
+            "weight": 3.807
+          },
+          {
+            "term": "target",
+            "weight": 3.807
+          },
+          {
+            "term": "translation",
+            "weight": 3.807
+          },
+          {
+            "term": "between",
+            "weight": 3.114
+          },
+          {
+            "term": "language",
+            "weight": 3.114
+          },
+          {
+            "term": "text",
+            "weight": 2.015
+          }
+        ],
+        "phrases": [
+          "target language",
+          "translation between"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "targetLang",
+            "pattern": "\\b(?:into|to)\\s+([A-Z][a-z]{2,})\\b",
+            "derived_from": "target language"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "MEDIA_AUTHENTICITY_CHECK",
+      "intent_name": "MEDIA_AUTHENTICITY_CHECK",
+      "description": "Query includes an actual image or video URL/reference and asks broadly whether it is authentic, real, or AI-generated. Words like 'authentic,' 'real,' 'validity,' or 'genuine' alone, with no actual media attached, do NOT qualify.",
+      "miner_count": 1,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "authentic",
+            "weight": 7.613
+          },
+          {
+            "term": "real",
+            "weight": 4.841
+          },
+          {
+            "term": "broadly",
+            "weight": 3.807
+          },
+          {
+            "term": "validity",
+            "weight": 3.807
+          },
+          {
+            "term": "words",
+            "weight": 3.807
+          },
+          {
+            "term": "ai-generated",
+            "weight": 3.114
+          },
+          {
+            "term": "like",
+            "weight": 3.114
+          },
+          {
+            "term": "genuine",
+            "weight": 2.708
+          },
+          {
+            "term": "image",
+            "weight": 2.708
+          },
+          {
+            "term": "url/reference",
+            "weight": 2.708
+          },
+          {
+            "term": "video",
+            "weight": 2.708
+          },
+          {
+            "term": "attached",
+            "weight": 2.42
+          }
+        ],
+        "phrases": [
+          "authentic real",
+          "video url",
+          "url reference",
+          "broadly whether",
+          "ai-generated words",
+          "words like"
+        ],
+        "examples": [
+          "authentic,",
+          "real,",
+          "validity,",
+          "genuine"
+        ],
+        "requirements": [],
+        "disqualifiers": [
+          "Words like 'authentic,' 'real,' 'validity,' or 'genuine' alone, with no actual media attached, do NOT qualify."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "url",
+            "pattern": "https?://[^\\s\"'<>]+",
+            "derived_from": "url"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "NEWS_HEADLINES",
+      "intent_name": "NEWS_HEADLINES",
+      "description": "Query asks for current news headlines for a topic or region, as a list rather than full articles.",
+      "miner_count": 3,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "full",
+            "weight": 3.807
+          },
+          {
+            "term": "articles",
+            "weight": 3.114
+          },
+          {
+            "term": "headlines",
+            "weight": 3.114
+          },
+          {
+            "term": "news",
+            "weight": 3.114
+          },
+          {
+            "term": "region",
+            "weight": 3.114
+          },
+          {
+            "term": "list",
+            "weight": 2.708
+          },
+          {
+            "term": "topic",
+            "weight": 2.708
+          },
+          {
+            "term": "current",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "current news",
+          "news headlines",
+          "full articles"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Query asks for current news headlines for a topic or region, as a list rather than full articles."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "NEWS_SEARCH",
+      "intent_name": "NEWS_SEARCH",
+      "description": "Query asks for news articles or coverage matching a topic, entity or time period. Prefer NEWS_HEADLINES when the user wants a headline list rather than article results.",
+      "miner_count": 5,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "news",
+            "weight": 6.227
+          },
+          {
+            "term": "article",
+            "weight": 3.807
+          },
+          {
+            "term": "coverage",
+            "weight": 3.807
+          },
+          {
+            "term": "headline",
+            "weight": 3.807
+          },
+          {
+            "term": "matching",
+            "weight": 3.807
+          },
+          {
+            "term": "period",
+            "weight": 3.807
+          },
+          {
+            "term": "articles",
+            "weight": 3.114
+          },
+          {
+            "term": "entity",
+            "weight": 3.114
+          },
+          {
+            "term": "headlines",
+            "weight": 3.114
+          },
+          {
+            "term": "results",
+            "weight": 3.114
+          },
+          {
+            "term": "time",
+            "weight": 3.114
+          },
+          {
+            "term": "wants",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "news articles",
+          "coverage matching",
+          "topic entity",
+          "time period",
+          "news headlines",
+          "headline list"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Prefer NEWS_HEADLINES when the user wants a headline list rather than article results."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "NEWS_HEADLINES",
+            "clause": "Prefer NEWS_HEADLINES when the user wants a headline list rather than article results."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "ONCHAIN_TX_LOOKUP",
+      "intent_name": "ONCHAIN_TX_LOOKUP",
+      "description": "Query supplies a transaction hash or names a specific on-chain transaction and asks for its details, status or effects. Requires an actual transaction reference, not a general question about how transactions work.",
+      "miner_count": 12,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "transaction",
+            "weight": 8.124
+          },
+          {
+            "term": "effects",
+            "weight": 3.807
+          },
+          {
+            "term": "hash",
+            "weight": 3.807
+          },
+          {
+            "term": "on-chain",
+            "weight": 3.807
+          },
+          {
+            "term": "status",
+            "weight": 3.807
+          },
+          {
+            "term": "transactions",
+            "weight": 3.807
+          },
+          {
+            "term": "work",
+            "weight": 3.807
+          },
+          {
+            "term": "reference",
+            "weight": 3.114
+          },
+          {
+            "term": "details",
+            "weight": 2.708
+          },
+          {
+            "term": "question",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "transaction hash",
+          "on-chain transaction",
+          "details status",
+          "transaction reference",
+          "transactions work"
+        ],
+        "examples": [],
+        "requirements": [
+          "Requires an actual transaction reference, not a general question about how transactions work."
+        ],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "txHash",
+            "pattern": "0x[0-9a-fA-F]{64}",
+            "derived_from": "transaction hash"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "RESEARCH_QUERY",
+      "intent_name": "RESEARCH_QUERY",
+      "description": "Query asks a research question and expects an answer supported by citations to sources.",
+      "miner_count": 7,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "citations",
+            "weight": 3.807
+          },
+          {
+            "term": "expects",
+            "weight": 3.807
+          },
+          {
+            "term": "research",
+            "weight": 3.807
+          },
+          {
+            "term": "supported",
+            "weight": 3.807
+          },
+          {
+            "term": "answer",
+            "weight": 2.708
+          },
+          {
+            "term": "sources",
+            "weight": 2.708
+          },
+          {
+            "term": "question",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "research question",
+          "answer supported"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "RESEARCH_SYNTHESIS",
+      "intent_name": "RESEARCH_SYNTHESIS",
+      "description": "Query asks to gather findings across multiple sources and synthesise them into a combined answer or summary, rather than returning a single fact or a list of links.",
+      "miner_count": 4,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "across",
+            "weight": 3.807
+          },
+          {
+            "term": "combined",
+            "weight": 3.807
+          },
+          {
+            "term": "fact",
+            "weight": 3.807
+          },
+          {
+            "term": "findings",
+            "weight": 3.807
+          },
+          {
+            "term": "gather",
+            "weight": 3.807
+          },
+          {
+            "term": "links",
+            "weight": 3.807
+          },
+          {
+            "term": "multiple",
+            "weight": 3.807
+          },
+          {
+            "term": "summary",
+            "weight": 3.807
+          },
+          {
+            "term": "synthesise",
+            "weight": 3.807
+          },
+          {
+            "term": "them",
+            "weight": 3.114
+          },
+          {
+            "term": "answer",
+            "weight": 2.708
+          },
+          {
+            "term": "list",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "gather findings",
+          "findings across",
+          "across multiple",
+          "multiple sources",
+          "synthesise them",
+          "combined answer"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Query asks to gather findings across multiple sources and synthesise them into a combined answer or summary, rather than returning a single fact or a list of links."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "SENTIMENT_ANALYSIS",
+      "intent_name": "SENTIMENT_ANALYSIS",
+      "description": "Query supplies text and asks what sentiment or emotional tone it expresses.",
+      "miner_count": 2,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "emotional",
+            "weight": 3.807
+          },
+          {
+            "term": "expresses",
+            "weight": 3.807
+          },
+          {
+            "term": "sentiment",
+            "weight": 3.807
+          },
+          {
+            "term": "tone",
+            "weight": 3.807
+          },
+          {
+            "term": "text",
+            "weight": 2.015
+          }
+        ],
+        "phrases": [
+          "emotional tone"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "SPORTS_SCORE",
+      "intent_name": "SPORTS_SCORE",
+      "description": "Query names a specific sports fixture, team or competition and asks for the current or most recent score. Distinct from asking who ultimately won a finished event, which is GAME_RESULT.",
+      "miner_count": 3,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "event",
+            "weight": 3.807
+          },
+          {
+            "term": "finished",
+            "weight": 3.807
+          },
+          {
+            "term": "game",
+            "weight": 3.807
+          },
+          {
+            "term": "result",
+            "weight": 3.807
+          },
+          {
+            "term": "team",
+            "weight": 3.807
+          },
+          {
+            "term": "ultimately",
+            "weight": 3.807
+          },
+          {
+            "term": "won",
+            "weight": 3.807
+          },
+          {
+            "term": "competition",
+            "weight": 3.114
+          },
+          {
+            "term": "fixture",
+            "weight": 3.114
+          },
+          {
+            "term": "recent",
+            "weight": 3.114
+          },
+          {
+            "term": "score",
+            "weight": 3.114
+          },
+          {
+            "term": "sports",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "sports fixture",
+          "fixture team",
+          "recent score",
+          "ultimately won",
+          "finished event",
+          "game result"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Distinct from asking who ultimately won a finished event, which is GAME_RESULT."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "GAME_RESULT",
+            "clause": "Distinct from asking who ultimately won a finished event, which is GAME_RESULT."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "SSL_VERIFICATION",
+      "intent_name": "SSL_VERIFICATION",
+      "description": "Query supplies a hostname or domain and asks about its TLS/SSL certificate, chain or configuration.",
+      "miner_count": 6,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "certificate",
+            "weight": 3.807
+          },
+          {
+            "term": "configuration",
+            "weight": 3.807
+          },
+          {
+            "term": "domain",
+            "weight": 3.807
+          },
+          {
+            "term": "hostname",
+            "weight": 3.807
+          },
+          {
+            "term": "tls/ssl",
+            "weight": 3.807
+          },
+          {
+            "term": "chain",
+            "weight": 2.42
+          }
+        ],
+        "phrases": [
+          "tls ssl",
+          "ssl certificate",
+          "certificate chain"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "domain",
+            "pattern": "\\b(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}\\b",
+            "derived_from": "hostname or domain"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "STOCK_PRICE",
+      "intent_name": "STOCK_PRICE",
+      "description": "Query names a listed equity or ticker and asks for its current or historical share price. A company mentioned in passing does not qualify.",
+      "miner_count": 5,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "equity",
+            "weight": 3.807
+          },
+          {
+            "term": "listed",
+            "weight": 3.807
+          },
+          {
+            "term": "share",
+            "weight": 3.807
+          },
+          {
+            "term": "ticker",
+            "weight": 3.807
+          },
+          {
+            "term": "company",
+            "weight": 3.114
+          },
+          {
+            "term": "historical",
+            "weight": 3.114
+          },
+          {
+            "term": "mentioned",
+            "weight": 3.114
+          },
+          {
+            "term": "passing",
+            "weight": 3.114
+          },
+          {
+            "term": "price",
+            "weight": 2.015
+          },
+          {
+            "term": "current",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "listed equity",
+          "historical share",
+          "share price",
+          "company mentioned"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "A company mentioned in passing does not qualify."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "symbol",
+            "pattern": "\\b[A-Z]{1,5}\\b",
+            "derived_from": "ticker"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "STORM_ALERT",
+      "intent_name": "STORM_ALERT",
+      "description": "Query names a specific, resolvable location and asks specifically about active or upcoming storm systems, high winds, or disruption risk from severe weather there — not general current conditions.",
+      "miner_count": 7,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "active",
+            "weight": 3.807
+          },
+          {
+            "term": "disruption",
+            "weight": 3.807
+          },
+          {
+            "term": "high",
+            "weight": 3.807
+          },
+          {
+            "term": "risk",
+            "weight": 3.807
+          },
+          {
+            "term": "severe",
+            "weight": 3.807
+          },
+          {
+            "term": "storm",
+            "weight": 3.807
+          },
+          {
+            "term": "systems",
+            "weight": 3.807
+          },
+          {
+            "term": "upcoming",
+            "weight": 3.807
+          },
+          {
+            "term": "winds",
+            "weight": 3.807
+          },
+          {
+            "term": "there",
+            "weight": 3.114
+          },
+          {
+            "term": "weather",
+            "weight": 3.114
+          },
+          {
+            "term": "conditions",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "resolvable location",
+          "upcoming storm",
+          "storm systems",
+          "systems high",
+          "high winds",
+          "disruption risk"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TASK_COMPLETION",
+      "intent_name": "TASK_COMPLETION",
+      "description": "Query asks about what makes an AI agent effective at completing multi-step tasks, or is itself a request to complete a defined multi-step task end-to-end.",
+      "miner_count": 11,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "multi-step",
+            "weight": 6.227
+          },
+          {
+            "term": "complete",
+            "weight": 3.807
+          },
+          {
+            "term": "completing",
+            "weight": 3.807
+          },
+          {
+            "term": "defined",
+            "weight": 3.807
+          },
+          {
+            "term": "effective",
+            "weight": 3.807
+          },
+          {
+            "term": "end-to-end",
+            "weight": 3.807
+          },
+          {
+            "term": "makes",
+            "weight": 3.807
+          },
+          {
+            "term": "tasks",
+            "weight": 3.807
+          },
+          {
+            "term": "agent",
+            "weight": 3.114
+          },
+          {
+            "term": "task",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "agent effective",
+          "completing multi-step",
+          "multi-step tasks",
+          "defined multi-step",
+          "multi-step task",
+          "task end-to-end"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TELEGRAPH_KNOWLEDGE",
+      "intent_name": "TELEGRAPH_KNOWLEDGE",
+      "description": "Query asks about Telegraph, Telegraph protocol, its products, or ecosystem — including Alexandria (flagship intelligence layer), the Explorer (leaderboard, live feed, signal search), Hackathon, WASM/miner registration, intents, the Miner YAML Registry (integrate.telegraphprotocol.com), current miners or their details, and any applications built on Telegraph (TruthWire, TrustFilter, ScholarGuard, ReviewRadar). Also covers protocol fundamentals like tokenomics, architecture, documentation, earning, and how the system works. Also covers any question where the user addresses the assistant directly as 'you' (e.g. 'what can you do', 'who are you', 'how can I use you') — the assistant is Telegraph. Use this for ANY question related to Telegraph, its products, platforms, ecosystem, or the assistant itself, rather than routing to general CHAT_COMPLETION or WEB_SEARCH.",
+      "miner_count": 2,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "telegraph",
+            "weight": 19.033
+          },
+          {
+            "term": "you",
+            "weight": 15.227
+          },
+          {
+            "term": "any",
+            "weight": 11.42
+          },
+          {
+            "term": "assistant",
+            "weight": 11.42
+          },
+          {
+            "term": "can",
+            "weight": 7.613
+          },
+          {
+            "term": "covers",
+            "weight": 7.613
+          },
+          {
+            "term": "ecosystem",
+            "weight": 7.613
+          },
+          {
+            "term": "products",
+            "weight": 7.613
+          },
+          {
+            "term": "protocol",
+            "weight": 6.227
+          },
+          {
+            "term": "search",
+            "weight": 5.416
+          },
+          {
+            "term": "use",
+            "weight": 5.416
+          },
+          {
+            "term": "alexandria",
+            "weight": 3.807
+          }
+        ],
+        "phrases": [
+          "any question",
+          "telegraph telegraph",
+          "telegraph protocol",
+          "alexandria flagship",
+          "flagship intelligence",
+          "intelligence layer"
+        ],
+        "examples": [
+          "(e.g.",
+          "who are you",
+          "how can I use you"
+        ],
+        "requirements": [],
+        "disqualifiers": [
+          "Use this for ANY question related to Telegraph, its products, platforms, ecosystem, or the assistant itself, rather than routing to general CHAT_COMPLETION or WEB_SEARCH."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "CHAT_COMPLETION",
+            "clause": "Use this for ANY question related to Telegraph, its products, platforms, ecosystem, or the assistant itself, rather than routing to general CHAT_COMPLETION or WEB_SEARCH."
+          },
+          {
+            "intent_id": "WEB_SEARCH",
+            "clause": "Use this for ANY question related to Telegraph, its products, platforms, ecosystem, or the assistant itself, rather than routing to general CHAT_COMPLETION or WEB_SEARCH."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TEXT_CLASSIFICATION",
+      "intent_name": "TEXT_CLASSIFICATION",
+      "description": "Query supplies text and asks for it to be assigned to one or more predefined categories or labels.",
+      "miner_count": 3,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "assigned",
+            "weight": 3.807
+          },
+          {
+            "term": "categories",
+            "weight": 3.807
+          },
+          {
+            "term": "labels",
+            "weight": 3.807
+          },
+          {
+            "term": "predefined",
+            "weight": 3.807
+          },
+          {
+            "term": "text",
+            "weight": 2.015
+          }
+        ],
+        "phrases": [
+          "predefined categories"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TEXT_GENERATION",
+      "intent_name": "TEXT_GENERATION",
+      "description": "Query asks for free-form written output for a described task — drafting, rewriting, summarising or composing text. Prefer CHAT_COMPLETION when the user simply wants an answer rather than produced text.",
+      "miner_count": 4,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "text",
+            "weight": 4.03
+          },
+          {
+            "term": "composing",
+            "weight": 3.807
+          },
+          {
+            "term": "drafting",
+            "weight": 3.807
+          },
+          {
+            "term": "produced",
+            "weight": 3.807
+          },
+          {
+            "term": "rewriting",
+            "weight": 3.807
+          },
+          {
+            "term": "simply",
+            "weight": 3.807
+          },
+          {
+            "term": "summarising",
+            "weight": 3.807
+          },
+          {
+            "term": "described",
+            "weight": 3.114
+          },
+          {
+            "term": "free-form",
+            "weight": 3.114
+          },
+          {
+            "term": "output",
+            "weight": 3.114
+          },
+          {
+            "term": "task",
+            "weight": 3.114
+          },
+          {
+            "term": "wants",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "free-form written",
+          "written output",
+          "described task",
+          "task drafting",
+          "drafting rewriting",
+          "rewriting summarising"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Prefer CHAT_COMPLETION when the user simply wants an answer rather than produced text."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "CHAT_COMPLETION",
+            "clause": "Prefer CHAT_COMPLETION when the user simply wants an answer rather than produced text."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TOKEN_HOLDER_COUNT",
+      "intent_name": "TOKEN_HOLDER_COUNT",
+      "description": "Query names a specific token or contract address and asks how many distinct addresses hold it. Not a request for the token's price, supply or market data.",
+      "miner_count": 5,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "token",
+            "weight": 4.841
+          },
+          {
+            "term": "contract",
+            "weight": 3.807
+          },
+          {
+            "term": "hold",
+            "weight": 3.807
+          },
+          {
+            "term": "many",
+            "weight": 3.807
+          },
+          {
+            "term": "addresses",
+            "weight": 3.114
+          },
+          {
+            "term": "address",
+            "weight": 2.708
+          },
+          {
+            "term": "data",
+            "weight": 2.42
+          },
+          {
+            "term": "market",
+            "weight": 2.42
+          },
+          {
+            "term": "price",
+            "weight": 2.015
+          }
+        ],
+        "phrases": [
+          "contract address",
+          "addresses hold",
+          "market data"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "address",
+            "pattern": "0x[0-9a-fA-F]{40}",
+            "derived_from": "contract address"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "TVL_LOOKUP",
+      "intent_name": "TVL_LOOKUP",
+      "description": "Query names a specific DeFi protocol, pool or chain and asks for the total value locked in it. Distinct from a token's market capitalisation.",
+      "miner_count": 10,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "capitalisation",
+            "weight": 3.807
+          },
+          {
+            "term": "defi",
+            "weight": 3.807
+          },
+          {
+            "term": "locked",
+            "weight": 3.807
+          },
+          {
+            "term": "pool",
+            "weight": 3.807
+          },
+          {
+            "term": "total",
+            "weight": 3.807
+          },
+          {
+            "term": "value",
+            "weight": 3.807
+          },
+          {
+            "term": "protocol",
+            "weight": 3.114
+          },
+          {
+            "term": "chain",
+            "weight": 2.42
+          },
+          {
+            "term": "market",
+            "weight": 2.42
+          },
+          {
+            "term": "token",
+            "weight": 2.42
+          }
+        ],
+        "phrases": [
+          "defi protocol",
+          "protocol pool",
+          "total value",
+          "value locked",
+          "market capitalisation"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "Distinct from a token's market capitalisation."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "protocol",
+            "pattern": "\\b[a-z][a-z0-9-]{2,}\\b",
+            "derived_from": "defi protocol"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "URL_SCAN",
+      "intent_name": "URL_SCAN",
+      "description": "Query supplies a URL and asks for it to be scanned and judged safe or unsafe.",
+      "miner_count": 10,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "judged",
+            "weight": 3.807
+          },
+          {
+            "term": "safe",
+            "weight": 3.807
+          },
+          {
+            "term": "scanned",
+            "weight": 3.807
+          },
+          {
+            "term": "unsafe",
+            "weight": 3.807
+          },
+          {
+            "term": "url",
+            "weight": 3.114
+          }
+        ],
+        "phrases": [
+          "judged safe"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "url",
+            "pattern": "https?://[^\\s\"'<>]+",
+            "derived_from": "url"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "VIDEO_VERIFICATION",
+      "intent_name": "VIDEO_VERIFICATION",
+      "description": "Query references an actual video file or URL and asks to verify its authenticity, origin, or whether it has been edited/deepfaked. The mere word 'video' in an unrelated question does not qualify — requires a real attached video.",
+      "miner_count": 1,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "video",
+            "weight": 8.124
+          },
+          {
+            "term": "edited/deepfaked",
+            "weight": 3.807
+          },
+          {
+            "term": "file",
+            "weight": 3.807
+          },
+          {
+            "term": "mere",
+            "weight": 3.807
+          },
+          {
+            "term": "origin",
+            "weight": 3.807
+          },
+          {
+            "term": "references",
+            "weight": 3.807
+          },
+          {
+            "term": "verify",
+            "weight": 3.807
+          },
+          {
+            "term": "authenticity",
+            "weight": 3.114
+          },
+          {
+            "term": "url",
+            "weight": 3.114
+          },
+          {
+            "term": "word",
+            "weight": 3.114
+          },
+          {
+            "term": "been",
+            "weight": 2.708
+          },
+          {
+            "term": "has",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "video file",
+          "authenticity origin",
+          "has been",
+          "been edited",
+          "edited deepfaked",
+          "mere word"
+        ],
+        "examples": [
+          "video"
+        ],
+        "requirements": [
+          "The mere word 'video' in an unrelated question does not qualify — requires a real attached video."
+        ],
+        "disqualifiers": [
+          "The mere word 'video' in an unrelated question does not qualify — requires a real attached video."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "url",
+            "pattern": "https?://[^\\s\"'<>]+",
+            "derived_from": "url"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "WALLET_BALANCE_CHECK",
+      "intent_name": "WALLET_BALANCE_CHECK",
+      "description": "Query names a specific blockchain address or ENS name and asks for its current native-coin or token balance on a named chain. A question that merely mentions a wallet without asking what it holds does not qualify.",
+      "miner_count": 10,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "balance",
+            "weight": 3.807
+          },
+          {
+            "term": "ens",
+            "weight": 3.807
+          },
+          {
+            "term": "holds",
+            "weight": 3.807
+          },
+          {
+            "term": "native-coin",
+            "weight": 3.807
+          },
+          {
+            "term": "wallet",
+            "weight": 3.807
+          },
+          {
+            "term": "blockchain",
+            "weight": 3.114
+          },
+          {
+            "term": "address",
+            "weight": 2.708
+          },
+          {
+            "term": "mentions",
+            "weight": 2.708
+          },
+          {
+            "term": "chain",
+            "weight": 2.42
+          },
+          {
+            "term": "token",
+            "weight": 2.42
+          },
+          {
+            "term": "current",
+            "weight": 1.409
+          },
+          {
+            "term": "question",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "blockchain address",
+          "current native-coin",
+          "token balance"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "A question that merely mentions a wallet without asking what it holds does not qualify."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": [
+          {
+            "slot": "address",
+            "pattern": "0x[0-9a-fA-F]{40}",
+            "derived_from": "blockchain address"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "WEATHER_CHECK",
+      "intent_name": "WEATHER_CHECK",
+      "description": "Query names a specific, resolvable location (city, region, coordinates) AND asks about CURRENT atmospheric/weather conditions there (e.g. current temperature). A location mentioned only in passing in an unrelated question does not qualify.",
+      "miner_count": 11,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "location",
+            "weight": 5.416
+          },
+          {
+            "term": "atmospheric/weather",
+            "weight": 3.807
+          },
+          {
+            "term": "city",
+            "weight": 3.807
+          },
+          {
+            "term": "coordinates",
+            "weight": 3.807
+          },
+          {
+            "term": "temperature",
+            "weight": 3.807
+          },
+          {
+            "term": "mentioned",
+            "weight": 3.114
+          },
+          {
+            "term": "passing",
+            "weight": 3.114
+          },
+          {
+            "term": "region",
+            "weight": 3.114
+          },
+          {
+            "term": "there",
+            "weight": 3.114
+          },
+          {
+            "term": "current",
+            "weight": 2.818
+          },
+          {
+            "term": "conditions",
+            "weight": 2.708
+          },
+          {
+            "term": "resolvable",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "resolvable location",
+          "location city",
+          "city region",
+          "region coordinates",
+          "current atmospheric",
+          "atmospheric weather"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [
+          "A location mentioned only in passing in an unrelated question does not qualify."
+        ],
+        "routes_elsewhere": [
+          {
+            "intent_id": "CURRENT",
+            "clause": "Query names a specific, resolvable location (city, region, coordinates) AND asks about CURRENT atmospheric/weather conditions there (e.g. current temperature)."
+          }
+        ],
+        "regex_hints": [
+          {
+            "slot": "lat",
+            "pattern": "-?\\d{1,3}\\.\\d+",
+            "derived_from": "coordinates"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "WEATHER_FORECAST",
+      "intent_name": "WEATHER_FORECAST",
+      "description": "Query names a specific, resolvable location and asks for FUTURE weather conditions over a stated time window (e.g. 'next 24 hours'), not current conditions.",
+      "miner_count": 14,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "conditions",
+            "weight": 5.416
+          },
+          {
+            "term": "future",
+            "weight": 3.807
+          },
+          {
+            "term": "hours",
+            "weight": 3.807
+          },
+          {
+            "term": "next",
+            "weight": 3.807
+          },
+          {
+            "term": "over",
+            "weight": 3.807
+          },
+          {
+            "term": "stated",
+            "weight": 3.807
+          },
+          {
+            "term": "window",
+            "weight": 3.807
+          },
+          {
+            "term": "time",
+            "weight": 3.114
+          },
+          {
+            "term": "weather",
+            "weight": 3.114
+          },
+          {
+            "term": "location",
+            "weight": 2.708
+          },
+          {
+            "term": "resolvable",
+            "weight": 2.708
+          },
+          {
+            "term": "current",
+            "weight": 1.409
+          }
+        ],
+        "phrases": [
+          "resolvable location",
+          "future weather",
+          "weather conditions",
+          "conditions over",
+          "stated time",
+          "time window"
+        ],
+        "examples": [
+          "next 24 hours"
+        ],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [
+          {
+            "intent_id": "FUTURE",
+            "clause": "Query names a specific, resolvable location and asks for FUTURE weather conditions over a stated time window (e.g. 'next 24 hours'), not current conditions."
+          }
+        ],
+        "regex_hints": [
+          {
+            "slot": "hours",
+            "pattern": "\\b(\\d{1,3})\\s*(?:hours?|hrs?|h)\\b",
+            "derived_from": "time window"
+          },
+          {
+            "slot": "days",
+            "pattern": "\\b(\\d{1,2})\\s*days?\\b",
+            "derived_from": "stated time window"
+          }
+        ]
+      }
+    },
+    {
+      "intent_id": "WEB_SEARCH",
+      "intent_name": "WEB_SEARCH",
+      "description": "Query needs current, live, or externally-sourced information not reliably answerable from static/training knowledge — general 'what is the current price of Bitcoin' questions that need up-to-date grounding.",
+      "miner_count": 10,
+      "routable": true,
+      "unroutable_reason": null,
+      "hints": {
+        "keywords": [
+          {
+            "term": "bitcoin",
+            "weight": 3.807
+          },
+          {
+            "term": "externally-sourced",
+            "weight": 3.807
+          },
+          {
+            "term": "grounding",
+            "weight": 3.807
+          },
+          {
+            "term": "information",
+            "weight": 3.807
+          },
+          {
+            "term": "need",
+            "weight": 3.807
+          },
+          {
+            "term": "needs",
+            "weight": 3.807
+          },
+          {
+            "term": "reliably",
+            "weight": 3.807
+          },
+          {
+            "term": "static/training",
+            "weight": 3.807
+          },
+          {
+            "term": "up-to-date",
+            "weight": 3.807
+          },
+          {
+            "term": "answerable",
+            "weight": 3.114
+          },
+          {
+            "term": "current",
+            "weight": 2.818
+          },
+          {
+            "term": "knowledge",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "needs current",
+          "current live",
+          "externally-sourced information",
+          "reliably answerable",
+          "static training",
+          "training knowledge"
+        ],
+        "examples": [
+          "what is the current price of Bitcoin"
+        ],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TEXT_AUTHENTICITY_CHECK",
+      "intent_name": "TEXT_AUTHENTICITY_CHECK",
+      "description": "Query supplies a block of text and asks whether it is genuine, original, or machine-generated. Where the user explicitly asks about AI authorship, prefer AI_TEXT_DETECTION.",
+      "miner_count": 0,
+      "routable": false,
+      "unroutable_reason": "no active miner declares this intent",
+      "hints": {
+        "keywords": [
+          {
+            "term": "text",
+            "weight": 4.03
+          },
+          {
+            "term": "authorship",
+            "weight": 3.807
+          },
+          {
+            "term": "explicitly",
+            "weight": 3.807
+          },
+          {
+            "term": "machine-generated",
+            "weight": 3.807
+          },
+          {
+            "term": "original",
+            "weight": 3.807
+          },
+          {
+            "term": "block",
+            "weight": 3.114
+          },
+          {
+            "term": "detection",
+            "weight": 3.114
+          },
+          {
+            "term": "genuine",
+            "weight": 2.708
+          },
+          {
+            "term": "whether",
+            "weight": 1.727
+          }
+        ],
+        "phrases": [
+          "genuine original",
+          "text detection"
+        ],
+        "examples": [],
+        "requirements": [],
+        "disqualifiers": [],
+        "routes_elsewhere": [
+          {
+            "intent_id": "AI_TEXT_DETECTION",
+            "clause": "Where the user explicitly asks about AI authorship, prefer AI_TEXT_DETECTION."
+          }
+        ],
+        "regex_hints": []
+      }
+    },
+    {
+      "intent_id": "TWITTER_SEARCH",
+      "intent_name": "TWITTER_SEARCH",
+      "description": "Query asks to search posts, accounts or discussion on X/Twitter specifically. A question that merely mentions Twitter as a topic does not qualify — the user must want results from the platform.",
+      "miner_count": 0,
+      "routable": false,
+      "unroutable_reason": "no active miner declares this intent",
+      "hints": {
+        "keywords": [
+          {
+            "term": "accounts",
+            "weight": 3.807
+          },
+          {
+            "term": "discussion",
+            "weight": 3.807
+          },
+          {
+            "term": "platform",
+            "weight": 3.807
+          },
+          {
+            "term": "posts",
+            "weight": 3.807
+          },
+          {
+            "term": "twitter",
+            "weight": 3.807
+          },
+          {
+            "term": "want",
+            "weight": 3.807
+          },
+          {
+            "term": "x/twitter",
+            "weight": 3.807
+          },
+          {
+            "term": "must",
+            "weight": 3.114
+          },
+          {
+            "term": "results",
+            "weight": 3.114
+          },
+          {
+            "term": "mentions",
+            "weight": 2.708
+          },
+          {
+            "term": "search",
+            "weight": 2.708
+          },
+          {
+            "term": "topic",
+            "weight": 2.708
+          }
+        ],
+        "phrases": [
+          "search posts",
+          "posts accounts",
+          "mentions twitter",
+          "must want",
+          "want results"
+        ],
+        "examples": [],
+        "requirements": [
+          "A question that merely mentions Twitter as a topic does not qualify — the user must want results from the platform."
+        ],
+        "disqualifiers": [
+          "A question that merely mentions Twitter as a topic does not qualify — the user must want results from the platform."
+        ],
+        "routes_elsewhere": [],
+        "regex_hints": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "network": "base-sepolia",
+  "chainId": 84532,
+  "rpc": "https://sepolia.base.org",
+  "explorer": "https://base-sepolia.blockscout.com",
+  "recordedAt": "2026-09-04T12:22Z",
+  "telegraph": {
+    "diamond": "0x5a2324aA18613FAD4e44bDF0d6c73Ec1f6D87ff8",
+    "usdc": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+    "machina": "0x7b9Bd0e5f9a4D0A01db18823De1D8442C84993b7",
+    "jobBasePriceUsdc": 1000000,
+    "note": "createJob debits the caller's on-chain escrow, not the wallet. Escrow is one way: there is no withdrawUSDC and no requestWithdrawal on this Diamond."
+  },
+  "contracts": {
+    "MinerCourt": {
+      "address": "0x86F03643Fb772ea1D55B91C5CFaea3B3184bf3A3",
+      "deployTx": "0x94f71bcbc10c26cdef75c3ef42f6bf6d546e7c111c49bb9ddaf23c81eb1cfbfb",
+      "deployBlock": 46377571,
+      "constructor": {
+        "diamond": "0x5a2324aA18613FAD4e44bDF0d6c73Ec1f6D87ff8",
+        "recorder": "0x8b224783FE5b3c52B7DB0cb9B1754f8812b75287"
+      },
+      "abi": [
+        "function enterVerdict(bytes32 caseId, bytes32 claimHash, uint8 verdict, uint16 confidenceBp, uint16 panelSize, bytes32 panelRoot)",
+        "function registerAppeal(bytes32 caseId, uint256 jobId)",
+        "function setRecorder(address next)",
+        "function subnetMessage(uint256 jobId, bool success, (address[],uint256[],string[],bool[]) response, string errorMessage)",
+        "function latestAnswer(bytes32 claimHash) view returns (uint8 verdict, uint16 confidenceBp, uint16 panelSize, uint256 updatedAt)",
+        "function isFresh(bytes32 claimHash, uint256 maxAge) view returns (bool)",
+        "function verifyJuror(bytes32 claimHash, bytes32 signalHash, bytes32[] proof) view returns (bool)",
+        "function getCase(bytes32 claimHash) view returns ((bytes32,bytes32,uint8,uint16,uint16,uint40))",
+        "function caseCount() view returns (uint256)",
+        "function claimHashes() view returns (bytes32[])",
+        "function claimHashAt(uint256 index) view returns (bytes32)",
+        "function appealCount() view returns (uint256)",
+        "function appealJobs() view returns (uint256[])",
+        "function appealCase(uint256 jobId) view returns (bytes32)",
+        "function appealAnswerHash(uint256 jobId) view returns (bytes32)",
+        "function diamond() view returns (address)",
+        "function recorder() view returns (address)",
+        "event VerdictEntered(bytes32 indexed caseId, bytes32 indexed claimHash, uint8 verdict, uint16 confidenceBp, uint16 panelSize, bytes32 panelRoot)",
+        "event AppealRegistered(bytes32 indexed caseId, uint256 indexed jobId)",
+        "event AppealAnswered(bytes32 indexed caseId, uint256 indexed jobId, bool success, (address[],uint256[],string[],bool[]) response, string errorMessage)"
+      ],
+      "verdicts": { "0": "unknown", "1": "supported", "2": "refuted", "3": "hung" }
+    },
+    "Gate": {
+      "address": "0x614b6Cd8caD480C384d612505C84B91e9F03A796",
+      "deployTx": "0x5892d6ac2b4ad8d9bdc84d3e64ebb8980475b9ac1fc3444a0c9e826257d4d738",
+      "constructor": { "court": "0x86F03643Fb772ea1D55B91C5CFaea3B3184bf3A3", "minConfidenceBp": 5000 },
+      "abi": [
+        "function actIfSupported(bytes32 claimHash, uint256 maxAge)",
+        "function court() view returns (address)",
+        "function minConfidenceBp() view returns (uint16)",
+        "function actions() view returns (uint256)",
+        "event Acted(bytes32 indexed claimHash, uint16 confidenceBp, uint16 panelSize, uint256 count)"
+      ]
+    }
+  },
+  "provenTransactions": {
+    "note": "Every line here is a real Base Sepolia transaction, checkable without trusting us.",
+    "enterVerdict": [
+      { "tx": "0x3d1b0e84eb5e3b467340dab93b39e038eee0d691cd048c464357d29325dfcfe3", "block": 46377649, "claimHash": "0x60548c6897ac877688c5b502c4184efff295203b5265fc0e5a10f8255ae16d2f", "verdict": "supported", "confidenceBp": 6000, "panelSize": 3 },
+      { "tx": "0xf4812edacf872b289bde324a55e58397e402609b9f37d87ad9148377d3bb111d", "block": 46377665, "claimHash": "0x734020a58013ea75289e80a48f7a9ccae5c13ea9a9ea2363c227a1681f4b33df", "verdict": "hung", "confidenceBp": 5000, "panelSize": 3 }
+    ],
+    "gateActed": {
+      "tx": "0x27cbde04c046a6b9211b023c85a8c748a57e93e5debaca72a6e58a1932fbd4b2",
+      "outcome": "success",
+      "on": "the supported case at 6000 bp, above the gate's 5000 bp floor"
+    },
+    "gateRefused": {
+      "tx": "0x0452cf690e9d1298261a416d6c8f502f3c0ab43c1bbc9f610720c0c987f9ca2d",
+      "outcome": "reverted NotSupported(3)",
+      "on": "the hung case, so the on-chain action refused to fire"
+    },
+    "escrow": {
+      "approve": "0xabff5a0b16155dc4ccc9f60d4a0dda950bb15c113cb220f4c6e79c91f5a7ef83",
+      "depositUSDC": "0x38d68198790ff1ceae24874ac14ee8d520714c4fee721064dba305c661368b1f"
+    },
+    "appeals": [
+      {
+        "jobId": 33,
+        "intent": "FACT_CHECK",
+        "intentId": "0xca548f2a1b4c24908df0c8b7d49be7be6a860d264e27973464379bf73f7e39b6",
+        "createJobTx": "0x75f418e3e07d6a138e1db924fc4d9124217ca2f1203bde6b5c0306f3ba0ebc2e",
+        "registerAppealTx": "0x0bdf63a61382bd26b8f615e4f0393f7392c2da64290327076d6f2b5948aed789",
+        "answeredTx": "0x6d3a9b3b9894f393c5892d929f22578090e00d904c19797b62f5961eba4a8889",
+        "answeredBlock": 46378009,
+        "delivered": "a refusal, and we publish it: error:invalid_domain, verdict:unknown, reason: no hostname was supplied so the certificate could not be analysed"
+      },
+      {
+        "jobId": 34,
+        "intent": "CHAT_COMPLETION",
+        "intentId": "0xccd42820467c59d6f703fb6d0fe57d6303fbfaa893759ee493c29293adfdc1f7",
+        "createJobTx": "0x92a56149809bb0f0840a0d394461e7608fbff03d19e8c28b272c1ed5823ea546",
+        "registerAppealTx": "0x759d4cd1bce15fa9fa3225f2283070049067cd9db9f13413c37da92467104b40",
+        "answeredTx": "0x7185d3e1d533e24ff7b609a062cd231d2b0a972c55138d2f0ef3fa84b5123a18",
+        "answeredBlock": 46378211,
+        "delivered": "integers [9500] and a prose verdict beginning Supported. No credible source lists Morpho on Base as a scam or phishing target"
+      }
+    ],
+    "appealIntentDiscipline": "Both appeals used intents where we operate no miner, so the 0.98 USDC the protocol pays the answering miner always leaves our control."
+  },
+  "context": {
+    "jobCountBeforeUs": 33,
+    "jobCountAfterUs": 35,
+    "railIdleSince": "2026-09-03T07:26:06Z",
+    "note": "No ERC-8183 job had been created by anyone on this network since 2026-09-03 07:26 UTC. Jobs 33 and 34 are ours."
+  }
+}

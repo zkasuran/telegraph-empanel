@@ -1,0 +1,14 @@
+name = "empanel"
+main = "src/worker.js"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# The site, the payer and the recorder are one Worker on purpose: the node sends
+# no CORS preflight on /engine/v1/ask, so a browser cannot pay for its own call.
+
+[vars]
+PAYER_ADDRESS = "0x8b224783FE5b3c52B7DB0cb9B1754f8812b75287"
+
+[[kv_namespaces]]
+binding = "EMPANEL"
+id = "27240bf7face4eb386c6a15606cb1e4c"

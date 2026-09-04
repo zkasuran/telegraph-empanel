@@ -1,0 +1,14 @@
+{
+  "name": "telegraph-track3",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@x402/core": "2.25.0",
+    "@x402/evm": "2.25.0",
+    "@x402/fetch": "2.25.0",
+    "viem": "2.56.3"
+  },
+  "devDependencies": {
+    "wrangler": "4.61.0"
+  }
+}

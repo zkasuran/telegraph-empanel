@@ -1,0 +1,441 @@
+{
+ "source": "graded from public /daemon/api/questions rows resolved through /engine/v1/signal/{hash}",
+ "observed_rows": 1500,
+ "generated": "2026-09-04",
+ "intents": {
+  "ACADEMIC_SEARCH": {
+   "miner_count": 6,
+   "router_description": "Query asks to search scholarly papers, journals or academic literature specifically, rather than the general web.",
+   "observed_calls": 17,
+   "observed_usable": 1,
+   "usable_rate": 0.0588,
+   "grades": {
+    "usable": 1,
+    "stub_text": 16
+   }
+  },
+  "AGENT_TASK": {
+   "miner_count": 7,
+   "router_description": "Query asks about autonomous AI agent behavior specifically (tool use, taking actions, multi-step autonomy) as distinct from a standard chatbot, or is itself a request requiring autonomous multi-step action.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "AI_TEXT_DETECTION": {
+   "miner_count": 4,
+   "router_description": "Query provides a specific block of text and asks whether it was written by an AI or a human. The user must supply actual text content to analyze \u2014 a question that merely asks about AI detection conceptually (without providing text to analyze) is not this intent.",
+   "observed_calls": 2,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 2
+   }
+  },
+  "CHAT_COMPLETION": {
+   "miner_count": 10,
+   "router_description": "General knowledge, reasoning, explanation, or conversational question answerable directly without live data, external sources, or specialized tooling. This is the default/general-purpose intent when nothing more specific clearly fits \u2014 e.g. 'explain what X does.'",
+   "observed_calls": 14,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "structured_only": 14
+   }
+  },
+  "CONTENT_EXTRACTION": {
+   "miner_count": 3,
+   "router_description": "Query supplies unstructured content and asks for specific structured fields to be pulled out of it.",
+   "observed_calls": 2,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 2
+   }
+  },
+  "CONTENT_MODERATION": {
+   "miner_count": 1,
+   "router_description": "Query is itself asking to classify, flag, or moderate a specific piece of provided content, OR asks how automated content moderation works as a method/technique \u2014 not merely a question that mentions moderation as an unrelated concept.",
+   "observed_calls": 13,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 13
+   }
+  },
+  "CONTENT_VERIFICATION": {
+   "miner_count": 1,
+   "router_description": "Query asks whether a specific piece of supplied content is genuine and unaltered, covering provenance and integrity generally rather than media forensics specifically.",
+   "observed_calls": 18,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "null_result": 18
+   }
+  },
+  "CRYPTO_PRICE": {
+   "miner_count": 14,
+   "router_description": "Query names a cryptocurrency asset and asks for its current or historical price. Prefer FINANCIAL_DATA for broader market or fundamentals questions.",
+   "observed_calls": 122,
+   "observed_usable": 22,
+   "usable_rate": 0.1803,
+   "grades": {
+    "no_label_field": 84,
+    "usable": 22,
+    "stub_text": 14,
+    "null_result": 2
+   }
+  },
+  "CURRENCY_EXCHANGE": {
+   "miner_count": 7,
+   "router_description": "Query names two currencies and asks for the exchange rate or a converted amount between them.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "CVE_LOOKUP": {
+   "miner_count": 5,
+   "router_description": "Query supplies a CVE identifier and asks for its details, severity or affected versions.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "DEEPFAKE_DETECTION": {
+   "miner_count": 1,
+   "router_description": "Query includes an actual image or video URL/reference and specifically asks whether it is a deepfake or whether a face/person in it has been synthetically generated or swapped. Requires real attached media \u2014 the word 'deepfake' alone with no media reference does not qualify.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "FACT_CHECK": {
+   "miner_count": 4,
+   "router_description": "Query supplies a specific claim or statement and asks whether it is true, with supporting evidence. A general knowledge question is CHAT_COMPLETION \u2014 this intent requires a checkable claim.",
+   "observed_calls": 18,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 18
+   }
+  },
+  "FINANCIAL_DATA": {
+   "miner_count": 8,
+   "router_description": "Query asks for market data, company fundamentals, or financial statistics beyond a single quoted price.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "FRAUD_DETECTION": {
+   "miner_count": 15,
+   "router_description": "Query asks how likely a specific entity, transaction or action is to be fraudulent.",
+   "observed_calls": 27,
+   "observed_usable": 12,
+   "usable_rate": 0.4444,
+   "grades": {
+    "usable": 12,
+    "declined": 15
+   }
+  },
+  "GAME_RESULT": {
+   "miner_count": 3,
+   "router_description": "Query names a specific completed sports fixture or competition and asks for its final outcome or winner. Distinct from an in-progress or live score, which is SPORTS_SCORE.",
+   "observed_calls": 3,
+   "observed_usable": 3,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 3
+   }
+  },
+  "GAS_PRICE": {
+   "miner_count": 9,
+   "router_description": "Query asks for the current or recent transaction fee level on a named blockchain network. Distinct from the price of that chain's token, which is CRYPTO_PRICE.",
+   "observed_calls": 22,
+   "observed_usable": 22,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 22
+   }
+  },
+  "IMAGE_VERIFICATION": {
+   "miner_count": 2,
+   "router_description": "Query includes an actual image URL/reference and asks whether it has been digitally manipulated, edited, or spliced (distinct from asking if it's AI-generated outright \u2014 that's MEDIA_AUTHENTICITY_CHECK). Requires real attached media.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "IP_GEOLOCATION": {
+   "miner_count": 5,
+   "router_description": "Query supplies an IP address and asks where it is located geographically. For abuse history, use IP_REPUTATION.",
+   "observed_calls": 7,
+   "observed_usable": 7,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 7
+   }
+  },
+  "LANGUAGE_GENERATION": {
+   "miner_count": 12,
+   "router_description": "Query asks about how language generation works as a capability or technique, or requests free-form natural-language output from a described prompt. Prefer CHAT_COMPLETION for ordinary conversational questions.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "LANGUAGE_TRANSLATION": {
+   "miner_count": 4,
+   "router_description": "Query supplies text and names a target language, asking for translation between two languages.",
+   "observed_calls": 2,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 2
+   }
+  },
+  "MEDIA_AUTHENTICITY_CHECK": {
+   "miner_count": 1,
+   "router_description": "Query includes an actual image or video URL/reference and asks broadly whether it is authentic, real, or AI-generated. Words like 'authentic,' 'real,' 'validity,' or 'genuine' alone, with no actual media attached, do NOT qualify.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "NEWS_HEADLINES": {
+   "miner_count": 3,
+   "router_description": "Query asks for current news headlines for a topic or region, as a list rather than full articles.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "NEWS_SEARCH": {
+   "miner_count": 5,
+   "router_description": "Query asks for news articles or coverage matching a topic, entity or time period. Prefer NEWS_HEADLINES when the user wants a headline list rather than article results.",
+   "observed_calls": 30,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "structured_only": 30
+   }
+  },
+  "ONCHAIN_TX_LOOKUP": {
+   "miner_count": 12,
+   "router_description": "Query supplies a transaction hash or names a specific on-chain transaction and asks for its details, status or effects. Requires an actual transaction reference, not a general question about how transactions work.",
+   "observed_calls": 34,
+   "observed_usable": 34,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 34
+   }
+  },
+  "RESEARCH_QUERY": {
+   "miner_count": 7,
+   "router_description": "Query asks a research question and expects an answer supported by citations to sources.",
+   "observed_calls": 1,
+   "observed_usable": 1,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 1
+   }
+  },
+  "RESEARCH_SYNTHESIS": {
+   "miner_count": 4,
+   "router_description": "Query asks to gather findings across multiple sources and synthesise them into a combined answer or summary, rather than returning a single fact or a list of links.",
+   "observed_calls": 2,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 2
+   }
+  },
+  "SENTIMENT_ANALYSIS": {
+   "miner_count": 2,
+   "router_description": "Query supplies text and asks what sentiment or emotional tone it expresses.",
+   "observed_calls": 2,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "no_label_field": 2
+   }
+  },
+  "SPORTS_SCORE": {
+   "miner_count": 3,
+   "router_description": "Query names a specific sports fixture, team or competition and asks for the current or most recent score. Distinct from asking who ultimately won a finished event, which is GAME_RESULT.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "SSL_VERIFICATION": {
+   "miner_count": 6,
+   "router_description": "Query supplies a hostname or domain and asks about its TLS/SSL certificate, chain or configuration.",
+   "observed_calls": 12,
+   "observed_usable": 12,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 12
+   }
+  },
+  "STOCK_PRICE": {
+   "miner_count": 5,
+   "router_description": "Query names a listed equity or ticker and asks for its current or historical share price. A company mentioned in passing does not qualify.",
+   "observed_calls": 5,
+   "observed_usable": 5,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 5
+   }
+  },
+  "STORM_ALERT": {
+   "miner_count": 7,
+   "router_description": "Query names a specific, resolvable location and asks specifically about active or upcoming storm systems, high winds, or disruption risk from severe weather there \u2014 not general current conditions.",
+   "observed_calls": 269,
+   "observed_usable": 258,
+   "usable_rate": 0.9591,
+   "grades": {
+    "stub_text": 11,
+    "usable": 258
+   }
+  },
+  "TASK_COMPLETION": {
+   "miner_count": 11,
+   "router_description": "Query asks about what makes an AI agent effective at completing multi-step tasks, or is itself a request to complete a defined multi-step task end-to-end.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "TELEGRAPH_KNOWLEDGE": {
+   "miner_count": 2,
+   "router_description": "Query asks about Telegraph, Telegraph protocol, its products, or ecosystem \u2014 including Alexandria (flagship intelligence layer), the Explorer (leaderboard, live feed, signal search), Hackathon, WASM/miner registration, intents, the Miner YAML Registry (integrate.telegraphprotocol.com), current miners or their details, and any applications built on Telegraph (TruthWire, TrustFilter, ScholarGuard, ReviewRadar). Also covers protocol fundamentals like tokenomics, architecture, documentation, earning, and how the system works. Also covers any question where the user addresses the assistant directly as 'you' (e.g. 'what can you do', 'who are you', 'how can I use you') \u2014 the assistant is Telegraph. Use this for ANY question related to Telegraph, its products, platforms, ecosystem, or the assistant itself, rather than routing to general CHAT_COMPLETION or WEB_SEARCH.",
+   "observed_calls": 7,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 7
+   }
+  },
+  "TEXT_CLASSIFICATION": {
+   "miner_count": 3,
+   "router_description": "Query supplies text and asks for it to be assigned to one or more predefined categories or labels.",
+   "observed_calls": 1,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "stub_text": 1
+   }
+  },
+  "TEXT_GENERATION": {
+   "miner_count": 4,
+   "router_description": "Query asks for free-form written output for a described task \u2014 drafting, rewriting, summarising or composing text. Prefer CHAT_COMPLETION when the user simply wants an answer rather than produced text.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "TOKEN_HOLDER_COUNT": {
+   "miner_count": 5,
+   "router_description": "Query names a specific token or contract address and asks how many distinct addresses hold it. Not a request for the token's price, supply or market data.",
+   "observed_calls": 111,
+   "observed_usable": 84,
+   "usable_rate": 0.7568,
+   "grades": {
+    "usable": 84,
+    "declined": 27
+   }
+  },
+  "TVL_LOOKUP": {
+   "miner_count": 10,
+   "router_description": "Query names a specific DeFi protocol, pool or chain and asks for the total value locked in it. Distinct from a token's market capitalisation.",
+   "observed_calls": 31,
+   "observed_usable": 10,
+   "usable_rate": 0.3226,
+   "grades": {
+    "usable": 10,
+    "declined": 13,
+    "no_label_field": 8
+   }
+  },
+  "URL_SCAN": {
+   "miner_count": 10,
+   "router_description": "Query supplies a URL and asks for it to be scanned and judged safe or unsafe.",
+   "observed_calls": 7,
+   "observed_usable": 2,
+   "usable_rate": 0.2857,
+   "grades": {
+    "usable": 2,
+    "stub_text": 5
+   }
+  },
+  "VIDEO_VERIFICATION": {
+   "miner_count": 1,
+   "router_description": "Query references an actual video file or URL and asks to verify its authenticity, origin, or whether it has been edited/deepfaked. The mere word 'video' in an unrelated question does not qualify \u2014 requires a real attached video.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "WALLET_BALANCE_CHECK": {
+   "miner_count": 10,
+   "router_description": "Query names a specific blockchain address or ENS name and asks for its current native-coin or token balance on a named chain. A question that merely mentions a wallet without asking what it holds does not qualify.",
+   "observed_calls": 14,
+   "observed_usable": 14,
+   "usable_rate": 1.0,
+   "grades": {
+    "usable": 14
+   }
+  },
+  "WEATHER_CHECK": {
+   "miner_count": 11,
+   "router_description": "Query names a specific, resolvable location (city, region, coordinates) AND asks about CURRENT atmospheric/weather conditions there (e.g. current temperature). A location mentioned only in passing in an unrelated question does not qualify.",
+   "observed_calls": 5,
+   "observed_usable": 1,
+   "usable_rate": 0.2,
+   "grades": {
+    "stub_text": 1,
+    "structured_only": 3,
+    "usable": 1
+   }
+  },
+  "WEATHER_FORECAST": {
+   "miner_count": 14,
+   "router_description": "Query names a specific, resolvable location and asks for FUTURE weather conditions over a stated time window (e.g. 'next 24 hours'), not current conditions.",
+   "observed_calls": 184,
+   "observed_usable": 92,
+   "usable_rate": 0.5,
+   "grades": {
+    "usable": 92,
+    "stub_text": 92
+   }
+  },
+  "WEB_SEARCH": {
+   "miner_count": 10,
+   "router_description": "Query needs current, live, or externally-sourced information not reliably answerable from static/training knowledge \u2014 general 'what is the current price of Bitcoin' questions that need up-to-date grounding.",
+   "observed_calls": 13,
+   "observed_usable": 0,
+   "usable_rate": 0.0,
+   "grades": {
+    "no_label_field": 5,
+    "structured_only": 8
+   }
+  },
+  "TEXT_AUTHENTICITY_CHECK": {
+   "miner_count": 0,
+   "router_description": "Query supplies a block of text and asks whether it is genuine, original, or machine-generated. Where the user explicitly asks about AI authorship, prefer AI_TEXT_DETECTION.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  },
+  "TWITTER_SEARCH": {
+   "miner_count": 0,
+   "router_description": "Query asks to search posts, accounts or discussion on X/Twitter specifically. A question that merely mentions Twitter as a topic does not qualify \u2014 the user must want results from the platform.",
+   "observed_calls": 0,
+   "observed_usable": 0,
+   "usable_rate": null,
+   "grades": {}
+  }
+ }
+}

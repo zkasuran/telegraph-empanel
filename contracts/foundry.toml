@@ -1,0 +1,16 @@
+# Empanel on-chain half. Kept out of the npm project on purpose: src = "." so the
+# two contracts sit beside this file and forge never walks node_modules.
+[profile.default]
+src = "."
+out = "out"
+libs = []
+test = "test"
+script = "script"
+solc = "0.8.28"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+bytecode_hash = "none"
+
+[rpc_endpoints]
+base_sepolia = "https://sepolia.base.org"

@@ -1,0 +1,31 @@
+Empanel
+Copyright (c) 2026 zkasuran
+SPDX-License-Identifier: LicenseRef-zkasuran-SAND-1.0
+
+This product bundles third-party components under their own terms.
+
+@x402/fetch, @x402/evm, @x402/core
+  Apache License 2.0
+  Copyright (c) x402 Foundation
+  https://github.com/x402-foundation/x402
+  Used as the reference implementation of the x402 exact-EVM scheme. Empanel's
+  own payer (src/x402.js) is written against the wire format so it runs inside a
+  Cloudflare Worker; these packages are used in tools/ to check our header bytes
+  against theirs.
+
+viem
+  MIT License
+  Copyright (c) 2023-present weth, LLC
+  https://github.com/wevm/viem
+  EIP-712 signing, keccak256, ABI encoding and the Base Sepolia RPC client.
+
+wrangler
+  MIT OR Apache-2.0
+  Copyright (c) Cloudflare, Inc.
+  Build and deploy tooling only. Not shipped in the Worker bundle.
+
+The ERC-8183 callback signature subnetMessage(uint256,bool,(address[],uint256[],
+string[],bool[]),string) and the OnChainData struct layout are protocol facts of
+the Telegraph Diamond, re-declared in contracts/MinerCourt.sol so the selector
+matches. No code was copied from the protocol's example repositories, which
+publish no licence.
