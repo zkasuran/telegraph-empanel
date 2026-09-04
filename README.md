@@ -13,6 +13,13 @@ so a visitor needs no wallet and no account.
 
 Built for Telegraph Hackathon Season I, Track 3.
 
+**State at submission**, all of it checkable from the links below: 219 paid Telegraph
+calls across 25 distinct miners and 8 intents, 21 cases tried, 15 corroborated and 6
+hung, 22 verdicts written to `MinerCourt` on Base Sepolia, 2 ERC-8183 appeals answered
+on chain by the protocol, and every counted vote's `signal_hash` re-derived locally.
+Live counters are on [`/ledger`](https://empanel.margyn.workers.dev/ledger), which also
+splits author-seeded cases from visitor cases rather than folding them together.
+
 ---
 
 ## Why
